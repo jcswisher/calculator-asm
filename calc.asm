@@ -4,7 +4,8 @@ section .data
         operation_text db "What operation would you like (+ OR -): "
 
 section .bss
-        input resb 16
+        first_num_input resb 16
+        second_num_input resb 16
 
 section .text
         .global _start
@@ -13,17 +14,12 @@ section .text
 _start:
         
         call _first_num_prompt
-
-        call _second_num_prompt
         
         call _get_first_num
 
-        // sys write
-        mov rax, 1
-        mov rdi, 1
-        lea rsi, [second_num_text]
-        mov rdx, 27
-        syscall
+        call _second_num_prompt
+        
+        call _get_second_num
         
         // sys read
         mov rax, 0
@@ -38,7 +34,15 @@ _start:
 _get_first_num:
         mov rax, 0
         mov rdi, 0
-        mov rsi, input
+        mov rsi, first_num_input
+        mov rdx, 16
+        syscall
+        ret
+
+_get_second_num:
+        mov rax, 0
+        mov rdi, 0
+        mov rsi, second_num_input
         mov rdx, 16
         syscall
         ret
