@@ -1,7 +1,7 @@
 section .data
-        first_num_prompt db "Enter the first integer: "
-        second_num_prompt db "Enter the second integer: "
-        operation_prompt db "What operation would you like (+ OR -): "
+        first_num_text db "Enter the first integer: "
+        second_num_text db "Enter the second integer: "
+        operation_text db "What operation would you like (+ OR -): "
 
 section .bss
         input resb 16
@@ -12,12 +12,7 @@ section .text
 
 _start:
         
-        // sys write
-        mov rax, 1
-        mov rdi, 1
-        lea rsi, [first_num_prompt]
-        mov rdx, 26
-        syscall
+        call _first_num_prompt
 
         // sys read
         mov rax, 0
@@ -31,7 +26,7 @@ _start:
         // sys write
         mov rax, 1
         mov rdi, 1
-        lea rsi, [second_num_prompt]
+        lea rsi, [second_num_text]
         mov rdx, 27
         syscall
         
@@ -59,3 +54,11 @@ _start:
         //lea rsi, [new_line]
         //mov rdx, 1
         //syscall
+
+_first_num_prompt:
+        mov rax, 1
+        mov rdi, 1
+        mov rsi, first_num_text
+        mov rdx, 25
+        syscall
+        ret
