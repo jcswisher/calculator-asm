@@ -1,5 +1,13 @@
-.global _start
-.intel_syntax noprefix
+section .data
+        first_num_prompt db "Enter the first integer: "
+        second_num_prompt db "Enter the second integer: "
+        operation_prompt db "What operation would you like (+ OR -): "
+
+section .bss
+        input resb 16
+
+section .text
+        .global _start
 
 
 _start:
@@ -51,18 +59,3 @@ _start:
         //lea rsi, [new_line]
         //mov rdx, 1
         //syscall
-        
-        
-        
-
-first_num_prompt:
-    .asciz "Enter the first integer: "
-
-second_num_prompt:
-    .asciz "Enter the second integer: "
-
-operation_prompt:
-    .asciz "What operation would you like (+ OR -): "
-
-new_line:
-    .asciz "\n"
