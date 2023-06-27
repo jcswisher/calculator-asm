@@ -1,68 +1,64 @@
-.global _start
-.intel_syntax noprefix
+section .data
+        first_num_text db "Enter the first integer: "
+        second_num_text db "Enter the second integer: "
+        operation_text db "What operation would you like (+ OR -): "
+
+section .bss
+        first_num_input resb 16
+        second_num_input resb 16
+
+section .text
+        global _start
 
 
 _start:
         
-        // sys write
+        call _first_num_prompt
+        
+        call _get_first_num
+
+        call _second_num_prompt
+        
+        call _get_second_num
+
+        call _operation_prompt
+
+_get_first_num:
+        mov rax, 0
+        mov rdi, 0
+        mov rsi, first_num_input
+        mov rdx, 16
+        syscall
+        ret
+
+_get_second_num:
+        mov rax, 0
+        mov rdi, 0
+        mov rsi, second_num_input
+        mov rdx, 16
+        syscall
+        ret
+
+_first_num_prompt:
         mov rax, 1
         mov rdi, 1
-        lea rsi, [first_num_prompt]
+        mov rsi, first_num_text
+        mov rdx, 25
+        syscall
+        ret
+
+_second_num_prompt:
+        mov rax, 1
+        mov rdi, 1
+        mov rsi, second_num_text
         mov rdx, 26
         syscall
+        ret
 
-        // sys read
-        mov rax, 0
-        sub rsp, 8
-        mov rdi, 0
-        lea rsi, [rsp]
-        // TODO: store users input from rsp
-        mov rdx, 1
-        syscall
-
-        // sys write
+_operation_prompt:
         mov rax, 1
         mov rdi, 1
-        lea rsi, [second_num_prompt]
-        mov rdx, 27
+        mov rsi, operation_text
+        mov rdx, 40
         syscall
-        
-        // sys read
-        mov rax, 0
-        sub rsp, 8
-        mov rdi, 0
-        lea rsi, [rsp]
-        // TODO: store users input from rsp
-        mov rdx, 1
-        syscall
-
-        // write back input
-        mov rax, 1
-        mov rdi, 1
-        // users input is still in rsp
-        mov rdx, 2
-        syscall
-
-        
-
-        // sys write
-        //mov rax, 1
-        //mov rdi, 1
-        //lea rsi, [new_line]
-        //mov rdx, 1
-        //syscall
-        
-        
-        
-
-first_num_prompt:
-    .asciz "Enter the first integer: "
-
-second_num_prompt:
-    .asciz "Enter the second integer: "
-
-operation_prompt:
-    .asciz "What operation would you like (+ OR -): "
-
-new_line:
-    .asciz "\n"
+        ret
