@@ -1,13 +1,16 @@
 # calculator-asm
-An CLI calculator program in x86-64 assembly
+An x86-64 Linux assembly CLI calculator program
 
 # Creating an executable
-Run assembler
+Run assembler to create object file
 
-```as calc.asm -o calc.o```
+```nasm -f elf64 calc.asm -o calc.o```
 
-Next run gcc
+Next run linker
 
-```gcc -o calc calc.o -nostdlib -static```
+```ld calc.o -o calc```
 
 Execute with: ```./calc```
+
+## Or use these commands together with an easy one-liner
+```nasm -f elf64 calc.asm -o calc.o && ld calc.o -o calc && ./calc```
