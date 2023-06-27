@@ -14,6 +14,8 @@ _start:
         
         call _first_num_prompt
 
+        call _second_num_prompt
+        
         // sys read
         mov rax, 0
         sub rsp, 8
@@ -60,5 +62,13 @@ _first_num_prompt:
         mov rdi, 1
         mov rsi, first_num_text
         mov rdx, 25
+        syscall
+        ret
+
+_second_num_prompt:
+        mov rax, 1
+        mov rdi, 1
+        mov rsi, second_num_text
+        mov rdx, 26
         syscall
         ret
