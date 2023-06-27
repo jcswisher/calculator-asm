@@ -8,7 +8,7 @@ section .bss
         second_num_input resb 16
 
 section .text
-        .global _start
+        global _start
 
 
 _start:
