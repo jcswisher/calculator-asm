@@ -20,16 +20,8 @@ _start:
         call _second_num_prompt
         
         call _get_second_num
-        
-        // sys read
-        mov rax, 0
-        sub rsp, 8
-        mov rdi, 0
-        lea rsi, [rsp]
-        // TODO: store users input from rsp
-        mov rdx, 1
-        syscall
 
+        call _operation_prompt
 
 _get_first_num:
         mov rax, 0
@@ -60,5 +52,13 @@ _second_num_prompt:
         mov rdi, 1
         mov rsi, second_num_text
         mov rdx, 26
+        syscall
+        ret
+
+_operation_prompt:
+        mov rax, 1
+        mov rdi, 1
+        mov rsi, operation_text
+        mov rdx, 40
         syscall
         ret
