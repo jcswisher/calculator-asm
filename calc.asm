@@ -16,14 +16,7 @@ _start:
 
         call _second_num_prompt
         
-        // sys read
-        mov rax, 0
-        sub rsp, 8
-        mov rdi, 0
-        lea rsi, [rsp]
-        // TODO: store users input from rsp
-        mov rdx, 1
-        syscall
+        call _get_first_num
 
         // sys write
         mov rax, 1
@@ -56,6 +49,14 @@ _start:
         //lea rsi, [new_line]
         //mov rdx, 1
         //syscall
+
+_get_first_num:
+        mov rax, 0
+        mov rdi, 0
+        mov rsi, input
+        mov rdx, 16
+        syscall
+        ret
 
 _first_num_prompt:
         mov rax, 1
