@@ -34,21 +34,6 @@ _start:
         mov rdx, 1
         syscall
 
-        // write back input
-        mov rax, 1
-        mov rdi, 1
-        // users input is still in rsp
-        mov rdx, 2
-        syscall
-
-        
-
-        // sys write
-        //mov rax, 1
-        //mov rdi, 1
-        //lea rsi, [new_line]
-        //mov rdx, 1
-        //syscall
 
 _get_first_num:
         mov rax, 0
