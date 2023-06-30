@@ -23,6 +23,8 @@ _start:
 
         call _operation_prompt
 
+        call _exit_no_err
+
 _get_first_num:
         mov rax, 0
         mov rdi, 0
@@ -62,3 +64,8 @@ _operation_prompt:
         mov rdx, 40
         syscall
         ret
+
+_exit_no_err:
+        mov rax, 60
+        mov rdi, 0
+        syscall
