@@ -1,7 +1,7 @@
 # calculator-asm
-An x86-64 Linux assembly CLI calculator program
+An x86_64 assembly (intel syntax) CLI calculator program for linux. This is intended to be a learning excerise, not a real program.
 
-# Creating an executable
+# Creating the executable
 Run assembler to create object file
 
 ```nasm -f elf64 calc.asm -o calc.o```
